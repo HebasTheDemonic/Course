@@ -1,0 +1,29 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace AVG_calculator
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int firstNumber, numberAvg=0,counter=0,sum=0;
+            do
+            {
+                Console.Write("Please enter a number: ");
+                firstNumber = Convert.ToInt32(Console.ReadLine());
+                sum = sum + firstNumber;
+                if (counter != 0)
+                {
+                    numberAvg = sum / counter;
+                }
+                counter++;
+            }
+            while (firstNumber != 0);
+            Console.WriteLine("The average is: {0}", numberAvg);
+        }
+    }
+}
