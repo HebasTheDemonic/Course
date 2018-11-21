@@ -1,0 +1,32 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace BreakContinueSum
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int sum = 0;
+            for (int counter = 0; counter < 100; counter++)
+            {
+                Console.Write("Please enter a number bigger then 0 (0 to exit,below 0 will be skipped): ");
+                int  number = Convert.ToInt32(Console.ReadLine());
+                if (number < 0)
+                {
+                    continue;
+                }
+                if (number == 0)
+                {
+                    break;
+                }
+                sum = sum + number;
+
+            }
+            Console.WriteLine("The sum of correct numbers is: {0}",sum);
+        }
+    }
+}
