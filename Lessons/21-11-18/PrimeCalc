@@ -1,0 +1,60 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PrimeSum
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int number,sum=0;
+            
+            do
+            {
+                Console.WriteLine("Please enter a number: ");
+                number = Convert.ToInt32(Console.ReadLine());
+                sum = sum + number;
+            }
+            while (IsPrime(number));
+            sum = sum - number;
+            Console.WriteLine("The sum of entered prime number is: {0}",sum);
+        }
+
+        static bool IsPrime(int number)
+        //return "true" if number is prime else return "false"
+        {
+            int divider = 2;
+            if (number % divider != 0)
+            {
+                divider = 3;
+                while (number % divider != 0 && divider < number)
+                {
+                    divider = divider + 2;
+                }
+                if (divider >= number)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (number == divider)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+
+            }
+        }
+    }
+}
