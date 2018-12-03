@@ -1,0 +1,59 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Q3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[,] subMap = new int[3, 3];
+            int subCounter = 0;
+            int attemptNumber = 0;
+            for (int col = 0; col < 3; col++)
+            {
+                for (int row = 0; row < 3; row++)
+                {
+                    subMap[col, row] = new Random().Next(0, 50);
+                    System.Threading.Thread.Sleep(300);
+                    if (subMap[col, row] % 3 == 0)
+                    {
+                        subMap[col, row] = 1;
+                    }
+                    else
+                    {
+                        subMap[col, row] = 0;
+                    }
+                    if (subMap[col, row] == 1)
+                    {
+                        subCounter++;
+                    }
+                }
+            }
+            while (subCounter > 0)
+            {
+                Console.Write("Choose which column to strike (1-3): ");
+                int colStrike = Convert.ToInt32(Console.ReadLine())-1;
+                Console.Write("Choose which row to strike (1-3): ");
+                int rowStrike = Convert.ToInt32(Console.ReadLine())-1;
+
+                if (subMap[colStrike, rowStrike] == 1)
+                {
+                    subMap[colStrike, rowStrike] = 0;
+                    subCounter--;
+                    Console.WriteLine("Boom");
+                }
+                else
+                {
+                    Console.WriteLine("Miss");
+                }
+                attemptNumber++;
+            }
+            Console.WriteLine("you have used {0} attemps",attemptNumber);
+            Console.ReadKey();
+        }
+    }
+}
