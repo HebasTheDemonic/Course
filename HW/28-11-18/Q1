@@ -27,7 +27,6 @@ namespace Q1
             gradeAvrage = Convert.ToDouble(gradeSum) / Convert.ToDouble(studNumber);
             Console.WriteLine("The sum of all student grades is: {0}",gradeSum);
             Console.WriteLine("The average of all student grades is: {0}",gradeAvrage);
-            Console.ReadKey();
         }
     }
 }
