@@ -1,0 +1,48 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Q2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[,] puzzle = new int[5, 5];
+            int option=0;
+            for (int col = 0; col < 5; col++)
+            {
+                for (int row = 0; row < 5; row++)
+                {
+                    puzzle[col, row] = new Random().Next(1, 10);
+                    System.Threading.Thread.Sleep(300);
+                }
+            }
+            do
+            {
+                Console.WriteLine("Choose an option:");
+                Console.WriteLine("1. Guess a number in the matrix");
+                Console.WriteLine("2. Exit program");
+                option = Convert.ToInt32(Console.ReadLine());
+                if (option == 1)
+                {
+                    Console.Write("Input your guess (numbers between 1 and 10): ");
+                    int guess = Convert.ToInt32(Console.ReadLine());
+                    for (int column = 0; column < 5; column++)
+                    {
+                        for (int row = 0; row < 5; row++)
+                        {
+                            if (guess == puzzle[column, row])
+                            {
+                                Console.WriteLine("the number {0} appears in row {2} column {1}",guess,column,row);
+                            }
+                        }
+                    }
+                }
+            }
+            while (option != 2);
+        }
+    }
+}
