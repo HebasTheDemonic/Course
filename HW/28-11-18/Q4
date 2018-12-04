@@ -24,39 +24,40 @@ namespace Q4
 
             for (int counter = 0; counter < classNumber; counter++)
             {
-                Console.Write("Enter the number of students in class {0}: ",counter);
+                Console.Write("Enter the number of students in class {0}: ", counter);
                 int studNumber = Convert.ToInt32(Console.ReadLine());
                 studNumber = studNumber + 1;
                 schoolArray[counter] = new int[studNumber];
             }
 
             //puts value inside each jagged array cell except cell 0 in each inner array those are set to 0 for now
-******************* ERROR HERE ******************
+           
             for (int jaggedCounter = 0; jaggedCounter < classNumber; jaggedCounter++)
             {
                 schoolArray[jaggedCounter][0] = 0;
-                for (int arrayCounter = 1; arrayCounter < schoolArray.GetLength(jaggedCounter); arrayCounter++)
+                for (int arrayCounter = 1; arrayCounter < schoolArray[jaggedCounter].Length; arrayCounter++)
                 {
-                    Console.Write("Enter the grade of student number {0} in class {1}: ",arrayCounter,jaggedCounter);
+                    Console.Write("Enter the grade of student number {0} in class {1}: ", arrayCounter, jaggedCounter);
                     schoolArray[jaggedCounter][arrayCounter] = Convert.ToInt32(Console.ReadLine());
                 }
             }
-******************* ERROR HERE ******************
+         
             //calculates sum of each array and places it in cell 0 of each, finds highest average and its index in the jagged array
             for (int jaggedCounter = 0; jaggedCounter < classNumber; jaggedCounter++)
             {
-                for (int arrayCounter = 1; arrayCounter <= schoolArray.GetLength(jaggedCounter); arrayCounter++)
+                for (int arrayCounter = 1; arrayCounter < schoolArray[jaggedCounter].Length; arrayCounter++)
                 {
-                    schoolArray[jaggedCounter][0] = schoolArray[jaggedCounter][0] + schoolArray[jaggedCounter][arrayCounter];  
+                    int test = schoolArray[jaggedCounter].Length;
+                    schoolArray[jaggedCounter][0] = schoolArray[jaggedCounter][0] + schoolArray[jaggedCounter][arrayCounter];
                 }
-                double classAvg =Convert.ToDouble (schoolArray[jaggedCounter][0] / (schoolArray.GetLength(jaggedCounter) - 1));
+                double classAvg = Convert.ToDouble(schoolArray[jaggedCounter][0] / (schoolArray[jaggedCounter].Length - 1));
                 if (classAvg > highestAvg)
                 {
                     highestAvg = classAvg;
                     biggestIndex = jaggedCounter;
                 }
             }
-            Console.WriteLine("The biggest average was in class {0}.",biggestIndex);
+            Console.WriteLine("The biggest average was in class {0}.", biggestIndex);
         }
     }
 }
