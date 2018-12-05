@@ -1,0 +1,92 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace _05_12_18
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+            //A function is a block of code under a set name. Every function starts with upprcase letter. eg:
+
+            Print1to10();
+
+            // will print every number from 1 to 10
+
+            // to send a variable to a function we write expected cell in function name
+
+            // {static void FuncName (int Veriable)}
+
+            // in the same method we can also send arrays. 
+            //if a function expects to receive 2 integers , for example, every time the function is called 2 integers must be sent
+            //calling to a function name that does not exist and pressing Alt+ENTER will create a new function based on the requirments from it.
+
+            // Exercise 1: make a function that returns an array:
+            int arraySize =Convert.ToInt32(Console.ReadLine());
+            int[] funcArray = new int[arraySize];
+            funcArray = ArrayMaker(arraySize);
+
+            // Exercise 2: make a function that prints a given array:
+
+            IntArrayPrint(funcArray);
+
+            //Exercise 3: make a function that receives an array of int and returns an array of double:
+
+            double[] doubleArray = IntToDouble(funcArray);
+            DoubleArrayPrint(doubleArray);
+            
+        }
+
+        private static double[] IntToDouble(int[] funcArray)
+        {
+            double[] doubleArray = new double [funcArray.Length];
+            for (int counter =0; counter < funcArray.Length; counter++)
+            {
+                doubleArray[counter] = funcArray[counter];
+            }
+            return doubleArray;
+        }
+
+        private static void IntArrayPrint(int[] funcArray)
+        {
+            for (int counter = 0; counter < funcArray.Length; counter++)
+            {
+                Console.Write($"{funcArray[counter]} ");
+            }
+            Console.WriteLine();
+        }
+
+        private static void DoubleArrayPrint(double[] funcArray)
+        {
+            for (int counter = 0; counter < funcArray.Length; counter++)
+            {
+                Console.Write($"{funcArray[counter]} ");
+            }
+            Console.WriteLine();
+        }
+
+            private static int[] ArrayMaker(int arraySize)
+        {
+            int[] madeArray = new int[arraySize];
+            Random randomGen = new Random();
+            for (int counter = 0; counter < madeArray.Length; counter++)
+            {
+                madeArray[counter] = randomGen.Next(1,1001);
+            }
+            return madeArray;
+        }
+
+        private static void Print1to10()
+        {
+            for (int i=1; i <= 10; i++)
+            {
+                Console.Write($"{i} ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
