@@ -16,7 +16,7 @@ namespace Q2
             {
                 for (int row = 0; row < 5; row++)
                 {
-                    puzzle[col, row] = new Random().Next(1, 10);
+                    puzzle[col, row] = new Random().Next(1, 11);
                     System.Threading.Thread.Sleep(300);
                 }
             }
