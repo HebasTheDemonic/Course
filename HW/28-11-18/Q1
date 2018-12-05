@@ -15,12 +15,12 @@ namespace Q1
             int[] studGrades = new int[studNumber];
             int gradeSum=0;
             double gradeAvrage;
-            for (int arrayCounter=0; arrayCounter < studNumber; arrayCounter++)
+            for (int arrayCounter=0; arrayCounter < studGrades.Length; arrayCounter++)
             {
                 Console.Write("Enter grade for student number {0}: ",arrayCounter+1);
                 studGrades[arrayCounter] = Convert.ToInt32(Console.ReadLine());
             }
-            for (int arrayCounter = 0 ;arrayCounter < studNumber; arrayCounter++)
+            for (int arrayCounter = 0 ;arrayCounter < studGrades.Length; arrayCounter++)
             {
                 gradeSum = gradeSum + studGrades[arrayCounter];
             }
