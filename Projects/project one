@@ -1,0 +1,21 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Project_1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+
+        }
+        static char[,] BoardMaker (int size)
+        {
+            char[,] newBoard = new char[size * 2, size * 2];
+
+        }
+    }
+}
