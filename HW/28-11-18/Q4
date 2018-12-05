@@ -17,7 +17,7 @@ namespace Q4
             double highestAvg = 0;
             for (int counter = 0; counter < classNumber; counter++)
             {
-                Console.Write("Enter the number of students in class {0}: ", counter);
+                Console.Write("Enter the number of students in class {0}: ", counter+1);
                 int studNumber = Convert.ToInt32(Console.ReadLine());
                 studNumber = studNumber + 1;
                 schoolArray[counter] = new int[studNumber];
