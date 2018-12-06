@@ -20,6 +20,7 @@ namespace Project_1
             string[] stringBank = new string[size * size / 2];
             string[,] gameBoard = BoardMaker(size, stringBank);
             char[,] printBoard = PrintMaker(size);
+            Console.ReadKey();
             
         }
 
@@ -67,7 +68,7 @@ namespace Project_1
         private static int[] CellNumberGenerator(int size,string[,] newBoard)
         {
             Random random = new Random();
-            int[] cellRandom = { random.Next(0, (size * 2) + 1), random.Next(0, (size * 2) + 1)};
+            int[] cellRandom = { random.Next(0, (size * 2) - 1), random.Next(0, (size * 2) - 1)};
             if (newBoard[cellRandom[0], cellRandom[1]] == null)
             {
                 return cellRandom;
