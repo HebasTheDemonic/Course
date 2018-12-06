@@ -10,21 +10,37 @@ namespace Project_1
     {
         static void Main(string[] args)
         {
-
+            RulePrint();
+            Console.Write("Please choose difficulty level (recomended 1-4): ");
+            int size = Convert.ToInt32(Console.ReadLine());
+            if (size > 4)
+            {
+                Console.WriteLine("I wonder are you brave or just a fool? well it's you funeral.");
+            }
+            string[] stringBank = new string[size * size / 2];
+            string[,] gameBoard = BoardMaker(size, stringBank);
+            char[,] printBoard = PrintMaker(size);
+            
         }
 
-        // creates the game board
-        /* 
-         plan: 1) receive a string from the user ---> make a function for input
-               2) choose 2 random spots on the board to place cards ----> random gen for numbers withing string array bounds
-               3) check is slots already populated ----> check if cell is null or not
-               4) receive a new string.  ----> call again for next loop
-               5) repeat according to number of pairs ----> loop? recursion?
-             
-             */
-        // main function for making the board
-       static string[,] BoardMaker(int size,string[] stringBank)
-       {
+        // Prints the rules for the game
+
+        private static void RulePrint()
+        {
+            Console.WriteLine("Welcome to the Memory Cards game, 2 player edition.");
+            Console.WriteLine();
+            Console.WriteLine("Stage One: Setting the Board");
+            Console.WriteLine("Choose difficulty level 1-4, the difficulty level will determine the game board's size.");
+            Console.WriteLine("Input as many strings as neccesary to make cards, each card may contain up to nine characters.");
+            Console.WriteLine("Each card will have 2 copies placed in a random spot on the board.");
+            Console.WriteLine();
+            Console.WriteLine("Stage Two: ");
+        }
+
+        // receives string from the user and places 2 copies of it in random null cells inside array
+
+        static string[,] BoardMaker(int size,string[] stringBank)
+        {
             int cardCounter = 0;
             string[,] newBoard = new string[size * 2, size * 2];
             for (int rowCount = 0; rowCount < (newBoard.GetLength(0)/2); rowCount++)
@@ -43,8 +59,11 @@ namespace Project_1
                     cell = CellNumberGenerator(size, newBoard);
                 }
             }
-       }
-        // chooses the cell number
+            return newBoard;
+        }
+
+        // chooses a random cell number on the board
+
         private static int[] CellNumberGenerator(int size,string[,] newBoard)
         {
             Random random = new Random();
@@ -58,6 +77,21 @@ namespace Project_1
                 cellRandom = CellNumberGenerator(size, newBoard);
             }
             return cellRandom;
+        }
+
+        // Creates the Array used for printing on screen
+
+        static char [,] PrintMaker(int size)
+        {
+            char[,] PrintArray = new char[size * 2, size * 2];
+            for (int rowCounter = 0; rowCounter < PrintArray.GetLength(0); rowCounter++)
+            {
+                for (int colCounter = 0; colCounter < PrintArray.GetLength(1); colCounter++)
+                {
+                    PrintArray[rowCounter, colCounter] = 'x';
+                }
+            }
+            return PrintArray;
         }
     }
 }
