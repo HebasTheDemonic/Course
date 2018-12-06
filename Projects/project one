@@ -55,9 +55,9 @@ namespace Project_1
                         card = card.Substring(0,9);
                     }
                     stringBank[cardCounter] = card;
-                    int[] cell = CellNumberGenerator(size,newBoard);
+                    int[] cell = CellNumberGenerator(newBoard);
                     newBoard[cell[0], cell[1]] = card;
-                    cell = CellNumberGenerator(size, newBoard);
+                    cell = CellNumberGenerator(newBoard);
                 }
             }
             return newBoard;
@@ -65,17 +65,17 @@ namespace Project_1
 
         // chooses a random cell number on the board
 
-        private static int[] CellNumberGenerator(int size,string[,] newBoard)
+        private static int[] CellNumberGenerator(string[,] newBoard)
         {
             Random random = new Random();
-            int[] cellRandom = { random.Next(0, (size * 2) - 1), random.Next(0, (size * 2) - 1)};
+            int[] cellRandom = { random.Next(0,newBoard.GetLength(0)), random.Next(0,newBoard.GetLength(1))};
             if (newBoard[cellRandom[0], cellRandom[1]] == null)
             {
                 return cellRandom;
             }
             else
             {
-                cellRandom = CellNumberGenerator(size, newBoard);
+                cellRandom = CellNumberGenerator( newBoard);
             }
             return cellRandom;
         }
