@@ -12,10 +12,52 @@ namespace Project_1
         {
 
         }
-        static char[,] BoardMaker (int size)
-        {
-            char[,] newBoard = new char[size * 2, size * 2];
 
+        // creates the game board
+        /* 
+         plan: 1) receive a string from the user ---> make a function for input
+               2) choose 2 random spots on the board to place cards ----> random gen for numbers withing string array bounds
+               3) check is slots already populated ----> check if cell is null or not
+               4) receive a new string.  ----> call again for next loop
+               5) repeat according to number of pairs ----> loop? recursion?
+             
+             */
+        // main function for making the board
+       static string[,] BoardMaker(int size,string[] stringBank)
+       {
+            int cardCounter = 0;
+            string[,] newBoard = new string[size * 2, size * 2];
+            for (int rowCount = 0; rowCount < (newBoard.GetLength(0)/2); rowCount++)
+            {
+                for (int colCount = 0; colCount < newBoard.GetLength(1); colCount++)
+                {
+                    Console.Write($"Please enter the string for card set number {cardCounter+1} (NOTE: maximum length is nine characters): ");
+                    string card = Console.ReadLine();
+                    if (card.Length > 10)
+                    {
+                        card = card.Substring(0,9);
+                    }
+                    stringBank[cardCounter] = card;
+                    int[] cell = CellNumberGenerator(size,newBoard);
+                    newBoard[cell[0], cell[1]] = card;
+                    cell = CellNumberGenerator(size, newBoard);
+                }
+            }
+       }
+        // chooses the cell number
+        private static int[] CellNumberGenerator(int size,string[,] newBoard)
+        {
+            Random random = new Random();
+            int[] cellRandom = { random.Next(0, (size * 2) + 1), random.Next(0, (size * 2) + 1)};
+            if (newBoard[cellRandom[0], cellRandom[1]] == null)
+            {
+                return cellRandom;
+            }
+            else
+            {
+                cellRandom = CellNumberGenerator(size, newBoard);
+            }
+            return cellRandom;
         }
     }
 }
