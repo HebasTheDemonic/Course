@@ -10,9 +10,9 @@ namespace Project_1
     {
         static void Main(string[] args)
         {
-            RulePrint();
+             RulePrint();
             Console.Write("Please choose difficulty level (recomended 1-4): ");
-            int size = Convert.ToInt32(Console.ReadLine());
+            int size = 2 * Convert.ToInt32(Console.ReadLine());
             if (size > 4)
             {
                 Console.WriteLine("I wonder are you brave or just a fool? well it's you funeral.");
@@ -20,6 +20,8 @@ namespace Project_1
             string[] stringBank = new string[size * size / 2];
             string[,] gameBoard = BoardMaker(size, stringBank);
             char[,] printBoard = PrintMaker(size);
+            Console.WriteLine("The board is now ready.");
+            Console.Write("Press any key to start.");
             Console.ReadKey();
             
         }
@@ -43,7 +45,7 @@ namespace Project_1
         static string[,] BoardMaker(int size,string[] stringBank)
         {
             int cardCounter = 0;
-            string[,] newBoard = new string[size * 2, size * 2];
+            string[,] newBoard = new string[size, size];
             for (int rowCount = 0; rowCount < newBoard.GetLength(0); rowCount++)
             {
                 for (int colCount = 0; colCount < (newBoard.GetLength(1) / 2); colCount++)
@@ -55,11 +57,12 @@ namespace Project_1
                         newBoard[rowCount, colCount] = newBoard[rowCount, colCount].Substring(0,9);
                     }
                     stringBank[cardCounter] = newBoard[rowCount, colCount];
-                    newBoard[rowCount, (newBoard.GetLength(0) / 2)+colCount] = newBoard[rowCount, colCount];
+                    int reverseCol = (size) - 1 - colCount;
+                    newBoard[rowCount, reverseCol] = newBoard[rowCount, colCount];
                     cardCounter++;
                 }
             }
-            int loopCounter = size * 8;
+            int loopCounter = size * 10;
             newBoard = BoardShuffle(newBoard,loopCounter);
             return newBoard;
         }
