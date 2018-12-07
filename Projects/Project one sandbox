@@ -4,33 +4,117 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace sandbox
+namespace Project_1
 {
-    class Sandbox
+    class Program
     {
         static void Main(string[] args)
         {
-            int size = 2;
+            RulePrint();
+            Console.Write("Please choose difficulty level (recomended 1-4): ");
+            int size = 2 * Convert.ToInt32(Console.ReadLine());
+            if (size > 4)
+            {
+                Console.WriteLine("I wonder are you brave or just a fool? well it's you funeral.");
+            }
             string[] stringBank = new string[size * size / 2];
-            int cardCounter = 0;
-            string[,] newBoard = new string[size * 2, size * 2];
+            string[,] gameBoard = BoardMaker(size, stringBank);
+            char[,] printBoard = PrintMaker(size);
+            Console.WriteLine("The board is now ready.");
+            Console.Write("Press any key to start.");
+            Console.ReadKey();
+            
+            
+        }
 
+        // Prints the rules for the game
+
+        private static void RulePrint()
+        {
+            Console.WriteLine("Welcome to the Memory Cards game, 2 player edition.");
+            Console.WriteLine();
+            Console.WriteLine("Stage One: Setting the Board");
+            Console.WriteLine("Choose difficulty level 1-4, the difficulty level will determine the game board's size.");
+            Console.WriteLine("Input as many strings as neccesary to make cards, each card may contain up to nine characters.");
+            Console.WriteLine("Each card will have 2 copies placed in a random spot on the board.");
+            Console.WriteLine();
+            Console.WriteLine("Stage Two: ");
+        }
+
+        // receives string from the user and places 2 copies of it in random null cells inside array
+
+        static string[,] BoardMaker(int size,string[] stringBank)
+        {
+            int cardCounter = 0;
+            string[,] newBoard = new string[size, size];
             for (int rowCount = 0; rowCount < newBoard.GetLength(0); rowCount++)
             {
                 for (int colCount = 0; colCount < (newBoard.GetLength(1) / 2); colCount++)
                 {
-                    Console.Write($"Please enter the string for card set number {cardCounter + 1} (NOTE: maximum length is nine characters): ");
+                    Console.Write($"Please enter the string for card set number {cardCounter+1} (NOTE: maximum length is nine characters): ");
                     newBoard[rowCount, colCount] = Console.ReadLine();
                     if (newBoard[rowCount, colCount].Length > 10)
                     {
-                        newBoard[rowCount, colCount] = newBoard[rowCount, colCount].Substring(0, 9);
+                        newBoard[rowCount, colCount] = newBoard[rowCount, colCount].Substring(0,9);
                     }
                     stringBank[cardCounter] = newBoard[rowCount, colCount];
-                    int reverseCol = (size * 2) - 1 - colCount;
+                    int reverseCol = (size) - 1 - colCount;
                     newBoard[rowCount, reverseCol] = newBoard[rowCount, colCount];
                     cardCounter++;
                 }
             }
+            int loopCounter = size * 10;
+            newBoard = BoardShuffle(newBoard,loopCounter);
+            return newBoard;
         }
+
+        //randomizes the order of cells in the game board
+
+        private static string[,] BoardShuffle(string[,] newBoard, int loopCounter)
+        {
+            Random randomGen = new Random();
+            if (loopCounter > 0)
+            {
+                int row1 = randomGen.Next(0, newBoard.GetLength(0));
+                int row2 = randomGen.Next(0, newBoard.GetLength(0));
+                int col1 = randomGen.Next(0, newBoard.GetLength(1));
+                int col2 = randomGen.Next(0, newBoard.GetLength(1));
+                string temp = newBoard[row1, col1];
+                newBoard[row1, col1] = newBoard[row2, col2];
+                newBoard[row2, col2] = temp;
+                loopCounter--;
+                newBoard = BoardShuffle(newBoard, loopCounter);
+            }
+            return newBoard;
+        }
+
+        // Creates the Array used for printing on screen
+
+        static char [,] PrintMaker(int size)
+        {
+            char[,] PrintArray = new char[size , size ];
+            for (int rowCounter = 0; rowCounter < PrintArray.GetLength(0); rowCounter++)
+            {
+                for (int colCounter = 0; colCounter < PrintArray.GetLength(1); colCounter++)
+                {
+                    PrintArray[rowCounter, colCounter] = 'x';
+                }
+            }
+            return PrintArray;
+        }
+
+        /*
+         * plan for making the game:
+         * 1) print which players turn it is ----> bool variable - player 1 if true, player 2 if false. flip when switching, use operator ^= to switch it
+         * 2) tell player to choose row and column (zero based? not zero based?) ---->   recursive function to make is easier on asking again if invalid
+         * 3) check if cell is valid  ----> receive the board check with .length if out of bounds max, negative out of bounds min also invalid if '0' on print board
+         * 4.a) if invalid call for new cell -----> part of 2 ---> 
+         * 4.b) print the board with the cell revealed
+         * 5) repeat 2-4 with 2nd cell
+         * 6) check if cells match ---> input from 2 must survive until 6 from both rounds~!
+         * 7) if cells not matched > no points given > flip bool > game continues
+         * 8) if cells match > bool not flipped > give point to player > check cardCounter if game finished 
+         * 9) cardCounter = 0 print game finished. print scores. print winner, give option to repeat game or exit.
+         */
     }
 }
