@@ -1,0 +1,36 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace sandbox
+{
+    class Sandbox
+    {
+        static void Main(string[] args)
+        {
+            int size = 2;
+            string[] stringBank = new string[size * size / 2];
+            int cardCounter = 0;
+            string[,] newBoard = new string[size * 2, size * 2];
+
+            for (int rowCount = 0; rowCount < newBoard.GetLength(0); rowCount++)
+            {
+                for (int colCount = 0; colCount < (newBoard.GetLength(1) / 2); colCount++)
+                {
+                    Console.Write($"Please enter the string for card set number {cardCounter + 1} (NOTE: maximum length is nine characters): ");
+                    newBoard[rowCount, colCount] = Console.ReadLine();
+                    if (newBoard[rowCount, colCount].Length > 10)
+                    {
+                        newBoard[rowCount, colCount] = newBoard[rowCount, colCount].Substring(0, 9);
+                    }
+                    stringBank[cardCounter] = newBoard[rowCount, colCount];
+                    int reverseCol = (size * 2) - 1 - colCount;
+                    newBoard[rowCount, reverseCol] = newBoard[rowCount, colCount];
+                    cardCounter++;
+                }
+            }
+        }
+    }
+}
