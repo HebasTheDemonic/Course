@@ -44,40 +44,44 @@ namespace Project_1
         {
             int cardCounter = 0;
             string[,] newBoard = new string[size * 2, size * 2];
-            for (int rowCount = 0; rowCount < (newBoard.GetLength(0)/2); rowCount++)
+            for (int rowCount = 0; rowCount < newBoard.GetLength(0); rowCount++)
             {
-                for (int colCount = 0; colCount < newBoard.GetLength(1); colCount++)
+                for (int colCount = 0; colCount < (newBoard.GetLength(1) / 2); colCount++)
                 {
                     Console.Write($"Please enter the string for card set number {cardCounter+1} (NOTE: maximum length is nine characters): ");
-                    string card = Console.ReadLine();
-                    if (card.Length > 10)
+                    newBoard[rowCount, colCount] = Console.ReadLine();
+                    if (newBoard[rowCount, colCount].Length > 10)
                     {
-                        card = card.Substring(0,9);
+                        newBoard[rowCount, colCount] = newBoard[rowCount, colCount].Substring(0,9);
                     }
-                    stringBank[cardCounter] = card;
-                    int[] cell = CellNumberGenerator(newBoard);
-                    newBoard[cell[0], cell[1]] = card;
-                    cell = CellNumberGenerator(newBoard);
+                    stringBank[cardCounter] = newBoard[rowCount, colCount];
+                    newBoard[rowCount, (newBoard.GetLength(0) / 2)+colCount] = newBoard[rowCount, colCount];
+                    cardCounter++;
                 }
             }
+            int loopCounter = size * 8;
+            newBoard = BoardShuffle(newBoard,loopCounter);
             return newBoard;
         }
 
-        // chooses a random cell number on the board
+        //randomizes the order of cells in the game board
 
-        private static int[] CellNumberGenerator(string[,] newBoard)
+        private static string[,] BoardShuffle(string[,] newBoard, int loopCounter)
         {
-            Random random = new Random();
-            int[] cellRandom = { random.Next(0,newBoard.GetLength(0)), random.Next(0,newBoard.GetLength(1))};
-            if (newBoard[cellRandom[0], cellRandom[1]] == null)
+            Random randomGen = new Random();
+            if (loopCounter > 0)
             {
-                return cellRandom;
+                int row1 = randomGen.Next(0, newBoard.GetLength(0));
+                int row2 = randomGen.Next(0, newBoard.GetLength(0));
+                int col1 = randomGen.Next(0, newBoard.GetLength(1));
+                int col2 = randomGen.Next(0, newBoard.GetLength(1));
+                string temp = newBoard[row1, col1];
+                newBoard[row1, col1] = newBoard[row2, col2];
+                newBoard[row2, col2] = temp;
+                loopCounter--;
+                BoardShuffle(newBoard, loopCounter);
             }
-            else
-            {
-                cellRandom = CellNumberGenerator( newBoard);
-            }
-            return cellRandom;
+            return newBoard;
         }
 
         // Creates the Array used for printing on screen
