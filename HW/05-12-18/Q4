@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Q4
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[,] matrix = FillRandom();
+            for (int counter = 1; counter <= 10; counter++)
+            {
+                CheckExist(matrix, counter);
+            }
+        }
+
+        private static int[,] FillRandom()
+        {
+            int[,] newArray = new int[10, 10];
+            Random randomGen = new Random();
+            for (int row = 0; row < newArray.GetLength(0); row++)
+            {
+                for (int col = 0; col < newArray.GetLength(1); col++)
+                {
+                    newArray[row, col] = randomGen.Next(1, 101);
+                }
+            }
+            return newArray;
+        }
+
+        private static void CheckExist(int[,] matrix, int number)
+        {
+            bool flag = true;
+            for (int row = 0; row < matrix.GetLength(0); row++)
+            {
+                for (int col = 0; col < matrix.GetLength(1); col++)
+                {
+                    if (matrix[row, col] == number)
+                    {
+                        Console.WriteLine($"The number {number} exists in this matrix");
+                        flag = false;
+                    }
+                }
+
+            }
+            if (flag)
+            {
+                Console.WriteLine($"The number {number} is missing from this matrix");
+            }
+        }
+    }
+}
