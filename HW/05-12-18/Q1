@@ -1,0 +1,41 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Q1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.Write("Input a number to check if prime: ");
+            int number = Convert.ToInt32(Console.ReadLine());
+            if (IsPrime(number)==1)
+            {
+                Console.WriteLine("This is a prime number");
+            }
+            else
+            {
+                Console.WriteLine("this is not a prime number");
+            }
+        }
+        static int IsPrime(int number)
+        {
+            int divider = 2;
+            while (number % divider != 0 && divider < number)
+            {
+                divider++;
+            }
+            if (number == divider)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+}
