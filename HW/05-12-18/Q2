@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Q2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] numberArray = { 2, 4, 9, 13, 17 };
+            CheckArrayForPrimeNumbers(numberArray);
+        }
+
+        private static void CheckArrayForPrimeNumbers(int[] numberArray)
+        {
+            for (int counter = 0; counter < numberArray.Length; counter++)
+            {
+                if (IsNumberPrime(numberArray[counter]) == 1)
+                {
+                    Console.WriteLine($"{numberArray[counter]} is a prime number");
+                }
+                else
+                {
+                    Console.WriteLine($"{numberArray[counter]} is not a prime number");
+                }
+            }
+        }
+
+        static int IsNumberPrime(int number)
+        {
+            int divider = 2;
+            while (number % divider != 0 && divider < number)
+            {
+                divider++;
+            }
+            if (number == divider)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+}
