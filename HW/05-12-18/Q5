@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Q5
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] arr = { -5, -10, 15, 2, 5 ,100 };
+            sortArray(arr);
+            PrintArray(arr);
+        }
+
+        private static void sortArray(int[] arr)
+        {
+            for (int arrayCounter = 0; arrayCounter < arr.Length; arrayCounter++)
+            {
+                int smallestIndex = arrayCounter;
+                int smallestvalue = arr[arrayCounter];
+                for (int innerCounter = arrayCounter; innerCounter < arr.Length; innerCounter++)
+                {
+                    if (smallestvalue > arr[innerCounter])
+                    {
+                        smallestvalue = arr[innerCounter];
+                        smallestIndex = innerCounter;
+                    }
+                }
+                if (smallestIndex != arrayCounter)
+                {
+                    arr[smallestIndex] = arr[arrayCounter];
+                    arr[arrayCounter] = smallestvalue;
+                }
+            }
+        }
+
+        private static void PrintArray(int[] arr)
+        {
+            for (int counter = 0; counter < arr.Length; counter++)
+            {
+                Console.Write($"{arr[counter]} ");
+            }
+            Console.WriteLine();
+        }
+    }
+}
