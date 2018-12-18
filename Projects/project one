@@ -193,6 +193,8 @@ namespace Project_1
         {
             Console.WriteLine("This is " + ((whichPlayer) ? "Player 1's turn." : "Player 2's turn."));
             bool flag = true;
+            Console.WriteLine("The current board is this:");
+            PrintCurrentBoard(gameBoard, printBoard);
             int card1Row, card1Column, card2Row, card2Column;
             do
             {
@@ -203,7 +205,7 @@ namespace Project_1
                 flag = DoesCellExist(gameBoard, card1Column, card1Row) ;
             }
             while (!flag);
-            PrintBoard(card1Row, card1Column, gameBoard, printBoard);
+            PrintCurrentBoard(gameBoard, printBoard, card1Row, card1Column);
             do
             {
                 Console.Write("Please choose the second card's row: ");
@@ -218,7 +220,7 @@ namespace Project_1
                 }
             }
             while (!flag);
-            PrintBoard(card1Row, card1Column, gameBoard, printBoard, card2Row, card2Column);
+            PrintCurrentBoard( gameBoard, printBoard, card1Row, card1Column, card2Row, card2Column);
             if (gameBoard[card1Row, card1Column] == gameBoard[card2Row, card2Column])
             {
                 PairCounter--;
@@ -237,7 +239,7 @@ namespace Project_1
 
         // prints the board after a card is chosen
 
-        private static void PrintBoard(int card1Row, int card1Column, string[,] gameBoard, char[,] printBoard, int card2Row = -1, int card2Column = -1)
+        private static void PrintCurrentBoard( string[,] gameBoard, char[,] printBoard, int card1Row = -1, int card1Column = -1, int card2Row = -1, int card2Column = -1)
         {
             for (int rowCounter = 0; rowCounter < gameBoard.GetLength(0); rowCounter++)
             {
