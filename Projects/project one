@@ -21,6 +21,7 @@ namespace Project_1
             
             string[,] gameBoard = BoardMaker(size, ref PairCounter);
             char[,] printBoard = PrintMaker(size);
+            BoardAlign(gameBoard);
             Console.WriteLine("The board is now ready.");
             Console.Write("Press any key to start.");
             Console.ReadKey();
@@ -144,6 +145,48 @@ namespace Project_1
             return PrintArray;
         }
 
+        // Aligns the gameBoard strings
+
+        private static void BoardAlign(string[,] gameBoard)
+        {
+            for (int rowCounter = 0; rowCounter < gameBoard.GetLength(0); rowCounter++)
+            {
+                for (int columnCounter = 0; columnCounter < gameBoard.GetLength(1); columnCounter++)
+                {
+                    switch (gameBoard[rowCounter,columnCounter].Length)
+                    {
+                        case '1':
+                            gameBoard[rowCounter, columnCounter] = "    gameBoard[rowCounter,columnCounter]    ";
+                            break;
+                        case '2':
+                            gameBoard[rowCounter, columnCounter] = "    gameBoard[rowCounter,columnCounter]   ";
+                            break;
+                        case '3':
+                            gameBoard[rowCounter, columnCounter] = "   gameBoard[rowCounter,columnCounter]   ";
+                            break;
+                        case '4':
+                            gameBoard[rowCounter, columnCounter] = "   gameBoard[rowCounter,columnCounter]  ";
+                            break;
+                        case '5':
+                            gameBoard[rowCounter, columnCounter] = "  gameBoard[rowCounter,columnCounter]  ";
+                            break;
+                        case '6':
+                            gameBoard[rowCounter, columnCounter] = "  gameBoard[rowCounter,columnCounter] ";
+                            break;
+                        case '7':
+                            gameBoard[rowCounter, columnCounter] = " gameBoard[rowCounter,columnCounter] ";
+                            break;
+                        case '8':
+                            gameBoard[rowCounter, columnCounter] = " gameBoard[rowCounter,columnCounter]";
+                            break;
+                        default:
+                            break;
+                    }
+
+                }
+            }
+        }
+
         // Main function for a single round of game, returns 1 if cards matched or 0 if not.
 
         private static int GameRound(ref bool whichPlayer, ref int PairCounter, string[,] gameBoard, char[,] printBoard)
@@ -160,7 +203,7 @@ namespace Project_1
                 flag = DoesCellExist(gameBoard, card1Column, card1Row) ;
             }
             while (!flag);
-            Print1stBoard(card1Row, card1Column, gameBoard, printBoard);
+            PrintBoard(card1Row, card1Column, gameBoard, printBoard);
             do
             {
                 Console.Write("Please choose the second card's row: ");
@@ -175,7 +218,7 @@ namespace Project_1
                 }
             }
             while (!flag);
-            Print2ndBoard(card1Row, card1Column, card2Row, card2Column, gameBoard, printBoard);
+            PrintBoard(card1Row, card1Column, gameBoard, printBoard, card2Row, card2Column);
             if (gameBoard[card1Row, card1Column] == gameBoard[card2Row, card2Column])
             {
                 PairCounter--;
@@ -192,35 +235,15 @@ namespace Project_1
             }
         }
 
+        // prints the board after a card is chosen
 
-
-        private static void Print1stBoard(int card1Row, int card1Column, string[,] gameBoard, char[,] printBoard)
+        private static void PrintBoard(int card1Row, int card1Column, string[,] gameBoard, char[,] printBoard, int card2Row = -1, int card2Column = -1)
         {
             for (int rowCounter = 0; rowCounter < gameBoard.GetLength(0); rowCounter++)
             {
                 for (int columnCounter = 0; columnCounter < gameBoard.GetLength(1); columnCounter++)
                 {
-                    if (card1Row != rowCounter && card1Column != columnCounter)
-                    {
-                        Console.Write($"     {printBoard [rowCounter,columnCounter]}     ");
-                    }
-                    else
-                    {
-                        Console.Write(gameBoard[rowCounter ,columnCounter]);
-                    }
-                    Console.Write(" ");
-                }
-                Console.WriteLine();
-            }
-        }
-
-        private static void Print2ndBoard(int card1Row, int card1Column, int card2Row, int card2Column, string[,] gameBoard, char[,] printBoard)
-        {
-            for (int rowCounter = 0; rowCounter < gameBoard.GetLength(0); rowCounter++)
-            {
-                for (int columnCounter = 0; columnCounter < gameBoard.GetLength(1); columnCounter++)
-                {
-                    if ((card1Row != rowCounter && card1Column != columnCounter) && (card2Row != rowCounter && card2Column != columnCounter))
+                    if (card1Row != rowCounter && card1Column != columnCounter && card2Row != rowCounter && card2Column != columnCounter)
                     {
                         Console.Write($"     {printBoard[rowCounter, columnCounter]}     ");
                     }
