@@ -113,7 +113,7 @@ namespace Project_1
                         }
 
                         int reverseCol = (size) - 1 - colCount;
-                        newBoard[rowCount, reverseCol] = temp;
+                        newBoard[rowCount, reverseCol] = newBoard[rowCount, colCount];
                         PairCounter++;
                     }
                 }
