@@ -44,12 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Account.cs" />
+    <Compile Include="AccountAlreadyExistsException.cs" />
     <Compile Include="AccountNotFoundException.cs" />
+    <Compile Include="BalanceException.cs" />
     <Compile Include="Bank.cs" />
     <Compile Include="CannotUseNegativeAmountException.cs" />
     <Compile Include="Customer.cs" />
+    <Compile Include="CustomerAlreadyExistsException.cs" />
     <Compile Include="CustomerNotFoundException.cs" />
     <Compile Include="IBank.cs" />
+    <Compile Include="NotSameCustomerException.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

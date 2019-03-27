@@ -8,7 +8,7 @@ namespace BankProject
 {
     public class Customer
     {
-        private static int numberOfCust=1;
+        private static int numberOfCust = 0;
         private readonly int _customerID;
         private readonly int _customerNumber;
         public string Name { get; private set; }
@@ -33,8 +33,8 @@ namespace BankProject
 
         public Customer(int id, string name, int phone)
         {
-            this._customerNumber = numberOfCust;
             numberOfCust++;
+            this._customerNumber = numberOfCust;
             this._customerID = id;
             this.PhNumber = phone;
             this.Name = name;
